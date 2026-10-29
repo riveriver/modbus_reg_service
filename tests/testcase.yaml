@@ -1,0 +1,15 @@
+tests:
+  modbus_reg_service.core_names:
+    platform_allow:
+      - qemu_cortex_m3
+    tags:
+      - modbus
+      - register
+  modbus_reg_service.core_without_names:
+    platform_allow:
+      - qemu_cortex_m3
+    extra_configs:
+      - CONFIG_MODBUS_REG_SERVICE_NAMES=n
+    tags:
+      - modbus
+      - register

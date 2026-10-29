@@ -1,0 +1,27 @@
+menuconfig MODBUS_REG_SERVICE
+	bool "Modbus register service"
+	default n
+	help
+	  Enable the sparse, thread-safe Modbus register service. The service
+	  stores runtime values in RAM only and does not provide persistence.
+
+if MODBUS_REG_SERVICE
+
+config MODBUS_REG_SERVICE_NAMES
+	bool "Keep register names"
+	default y
+	help
+	  Keep the enum-derived register names and enable name lookup for shell
+	  and diagnostics. Disable this option to remove the names from firmware.
+
+config MODBUS_REG_SERVICE_SHELL
+	bool "Modbus register diagnostic shell"
+	depends on SHELL
+	depends on MODBUS_REG_SERVICE_NAMES
+	default y
+	help
+	  Add read-only 'modbus-reg list' and 'modbus-reg get <name>' commands.
+	  A product must explicitly attach the service instance that the shell
+	  should inspect. The shell never changes register values.
+
+endif
